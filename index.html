@@ -5,76 +5,113 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>3D Wallpaper Studio — High-Quality 3D Wallpapers</title>
 <meta name="description" content="3D Wallpaper Studio creates and curates high-quality 3D wallpaper images for phone and desktop, shared daily on Pinterest and available to download.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Public+Sans:wght@600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0f1115; --bg-raised:#171a20; --line:#262b33;
-    --ink:#eef1f5; --ink-soft:#a6acb8;
-    --accent:#7c9cff;
+    --bg:#14052b;
+    --surface:#1a0934;
+    --surface-high:#210f3d;
+    --surface-highest:#281446;
+    --outline:#504069;
+    --ink:#eee0ff;
+    --ink-soft:#b6a3d1;
+    --primary:#9880ff;
+    --primary-dim:#7957f7;
+    --on-primary:#14052b;
+    --tertiary:#f37cad;
+    --font-head:'Space Grotesk',sans-serif;
+    --font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --font-label:'Public Sans',sans-serif;
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.6;}
-  .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
-  header{padding:80px 0 60px;border-bottom:1px solid var(--line);}
-  .brand{font-weight:700;font-size:20px;letter-spacing:-0.01em;margin-bottom:40px;}
-  h1{font-size:clamp(32px,5vw,48px);line-height:1.1;margin:0 0 18px;max-width:16ch;}
-  .dek{font-size:19px;color:var(--ink-soft);max-width:52ch;margin:0 0 28px;}
-  .cta{display:inline-flex;gap:12px;flex-wrap:wrap;}
-  .btn{display:inline-block;padding:12px 22px;border-radius:6px;text-decoration:none;font-weight:600;font-size:15px;}
-  .btn.primary{background:var(--accent);color:#0f1115;}
-  .btn.secondary{border:1px solid var(--line);color:var(--ink);}
-  section{padding:56px 0;border-bottom:1px solid var(--line);}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.6;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+  a{color:var(--primary);}
+
+  header.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--outline);}
+  header.hero::before{
+    content:"";position:absolute;inset:0;
+    background:url('hero.png') center 30%/cover no-repeat;
+    opacity:0.55;
+  }
+  header.hero::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(20,5,43,0.35) 0%, var(--bg) 92%);
+  }
+  header.hero .wrap{position:relative;z-index:1;padding:90px 24px 70px;}
+  .brand{font-family:var(--font-label);font-weight:600;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:32px;}
+  h1{font-family:var(--font-head);font-weight:700;font-size:clamp(34px,5.5vw,54px);line-height:1.08;margin:0 0 18px;max-width:15ch;text-shadow:0 2px 24px rgba(20,5,43,0.6);}
+  .dek{font-size:18px;color:var(--ink-soft);max-width:50ch;margin:0 0 32px;}
+  .cta{display:inline-flex;gap:14px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform 0.15s ease, box-shadow 0.15s ease;}
+  .btn.primary{background:var(--primary-dim);color:#fff;box-shadow:0 8px 24px rgba(121,87,247,0.35);}
+  .btn.primary:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(121,87,247,0.5);}
+  .btn.secondary{border:1px solid var(--outline);color:var(--ink);}
+  .btn.secondary:hover{border-color:var(--primary);}
+
+  section{padding:64px 0;border-bottom:1px solid var(--outline);}
   section:last-of-type{border-bottom:none;}
-  h2{font-size:24px;margin:0 0 20px;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;}
-  .card{background:var(--bg-raised);border:1px solid var(--line);border-radius:8px;padding:22px;}
-  .card h3{margin:0 0 8px;font-size:16px;}
+  .eyebrow{font-family:var(--font-label);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--tertiary);margin:0 0 10px;}
+  h2{font-family:var(--font-head);font-weight:700;font-size:26px;margin:0 0 24px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;}
+  .card{background:var(--surface-high);border:1px solid var(--outline);border-radius:8px;padding:24px;transition:border-color 0.15s ease, transform 0.15s ease;}
+  .card:hover{border-color:var(--primary);transform:translateY(-2px);}
+  .card h3{font-family:var(--font-head);margin:0 0 8px;font-size:17px;}
   .card p{margin:0;color:var(--ink-soft);font-size:14.5px;}
-  footer{padding:40px 0;color:var(--ink-soft);font-size:13.5px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;}
+  .about p{color:var(--ink-soft);max-width:65ch;font-size:15.5px;}
+
+  footer{padding:44px 0;color:var(--ink-soft);font-size:13.5px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;}
   footer a{color:var(--ink-soft);}
-  a{color:var(--accent);}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <div class="brand">3D Wallpaper Studio</div>
-    <h1>High-quality 3D wallpapers, curated daily.</h1>
-    <p class="dek">We design and curate original 3D wallpaper art for phone and desktop, and share new pieces every day on Pinterest.</p>
-    <div class="cta">
-      <a class="btn primary" href="https://www.pinterest.com/pinwallpaper_free" target="_blank" rel="noopener">Follow on Pinterest</a>
-      <a class="btn secondary" href="https://www.pinterest.com/pinwallpaper_free" target="_blank" rel="noopener">Contact us</a>
+  <header class="hero">
+    <div class="wrap">
+      <div class="brand">3D Wallpaper Studio</div>
+      <h1>High-quality 3D wallpapers, curated daily.</h1>
+      <p class="dek">We design and curate original 3D wallpaper art for phone and desktop, and share new pieces every day on Pinterest.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://www.pinterest.com/pinwallpaper_free" target="_blank" rel="noopener">Follow on Pinterest</a>
+        <a class="btn secondary" href="https://www.pinterest.com/pinwallpaper_free" target="_blank" rel="noopener">Contact us</a>
+      </div>
     </div>
   </header>
 
-  <section>
-    <h2>What we do</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Original 3D artwork</h3>
-        <p>Every wallpaper is designed for depth, color, and detail — built to look sharp on modern phone and desktop displays.</p>
-      </div>
-      <div class="card">
-        <h3>New pieces daily</h3>
-        <p>We publish new wallpapers regularly, organized by style and mood, so there's always something fresh to download.</p>
-      </div>
-      <div class="card">
-        <h3>Shared on Pinterest</h3>
-        <p>Our full catalog is shared on Pinterest, where you can save, browse, and download the pieces you like.</p>
-      </div>
-    </div>
-  </section>
+  <div class="wrap">
 
-  <section>
-    <h2>About</h2>
-    <p style="color:var(--ink-soft);max-width:65ch;">3D Wallpaper Studio is an independent project focused on original wallpaper design. Have a request, a licensing question, or feedback? Message us on <a href="https://www.pinterest.com/pinwallpaper_free" target="_blank" rel="noopener">Pinterest</a>.</p>
-  </section>
+    <section>
+      <div class="eyebrow">What we do</div>
+      <h2>Original, dimensional, made daily</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Original 3D artwork</h3>
+          <p>Every wallpaper is designed for depth, color, and detail — built to look sharp on modern phone and desktop displays.</p>
+        </div>
+        <div class="card">
+          <h3>New pieces daily</h3>
+          <p>We publish new wallpapers regularly, organized by style and mood, so there's always something fresh to download.</p>
+        </div>
+        <div class="card">
+          <h3>Shared on Pinterest</h3>
+          <p>Our full catalog is shared on Pinterest, where you can save, browse, and download the pieces you like.</p>
+        </div>
+      </div>
+    </section>
 
-  <footer>
-    <span>&copy; 2026 3D Wallpaper Studio</span>
-    <span><a href="privacy.html">Privacy Policy</a></span>
-  </footer>
+    <section class="about">
+      <div class="eyebrow">About</div>
+      <h2>An independent wallpaper studio</h2>
+      <p>3D Wallpaper Studio is an independent project focused on original wallpaper design. Have a request, a licensing question, or feedback? Message us on <a href="https://www.pinterest.com/pinwallpaper_free" target="_blank" rel="noopener">Pinterest</a>.</p>
+    </section>
 
-</div>
+    <footer>
+      <span>&copy; 2026 3D Wallpaper Studio</span>
+      <span><a href="privacy.html">Privacy Policy</a></span>
+    </footer>
+
+  </div>
 </body>
 </html>
